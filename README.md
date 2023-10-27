@@ -63,17 +63,24 @@ To load directly from Hugging Face, you can do the following:
   from utils import get_ss_model
   import torch
 
+  # Check if a CUDA-compatible GPU is available and set the device accordingly
   device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
+  # Get the source separation model configuration from the specified YAML file
   ss_model = get_ss_model('config/audiosep_base.yaml')
 
+  # Create an instance of the AudioSep model from a pretrained model checkpoint,
+  # while providing the source separation model and setting the device
   model = AudioSep.from_pretrained("nielsr/audiosep-demo", ss_model=ss_model)
 
+  # Define the paths and information for audio separation
   audio_file = 'path_to_audio_file'
   text = 'textual_description'
   output_file='separated_audio.wav'
 
-  # AudioSep processes the audio at 32 kHz sampling rate  
+  # Note: The 'inference' function processes audio at a 32 kHz sampling rate
+  # Perform audio separation using the 'inference' function with the specified model, audio 
+    file, text, output file, and device
   inference(model, audio_file, text, output_file, device)
   ```
 <hr>
